@@ -1,8 +1,10 @@
+from modelos.database import Database
 class  Avengers:
  
     lista_de_avengers = []
  
-    def __init__(self, nome_heroi='', nome_real='', categoria=[], poderes=[], poder_principal='', fraquezas=[], nivel_forca='', convocacao=False, tornozeleira=False , gps=False): # método construtor
+    def __init__(self, id, nome_heroi='', nome_real='', categoria=[], poderes=[], poder_principal='', fraquezas=[], nivel_forca='', convocacao=False, tornozeleira=False , gps=False): # método construtor
+        self.id=id
         self.nome_heroi = nome_heroi # declaração de um atributo e atribuiçãode um valor
         self.nome_real = nome_real # variaveis de instância
         self.categoria = categoria
@@ -35,3 +37,16 @@ class  Avengers:
                 return avengers
         return None  
 
+    def carregar_herois():
+        try:
+            db = Database()
+            db.connect()
+
+            query = 'SELECT nome_heroi, nome_real, categoria, poderes, poder_principal, fraquezas, nivel_forca FROM heroi'
+            herois = db.select(query)
+            for heroi in herois:
+                Avengers(*heroi)
+        except Exception as e:
+            print(f'Error: {e}')
+        finally:
+            db.disconnect()

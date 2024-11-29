@@ -5,6 +5,9 @@ from modelos.database import Database #
 
 class Interface:
 
+    def __init__(self):
+        Avengers.carregar_herois()
+        self.apresentar_menu_principal()
 
     @staticmethod
     def imprime_titulo_app():
@@ -56,7 +59,7 @@ class Interface:
         fraquezas = input('Fraquezas do herói: ')
         nivel_forca = input('Nível de força: ')
 
-        avengers = Avengers(nome_heroi, nome_real, categoria, poderes, poder_principal, fraquezas, nivel_forca, convocacao='', tornozeleira='', gps='')
+        avengers = Avengers(nome_heroi, nome_real, categoria, poderes, poder_principal, fraquezas, nivel_forca)
 
         #Salvar o vingador no banco de dados
         try:
@@ -65,6 +68,11 @@ class Interface:
             query = "INSERT INTO heroi (nome_heroi, nome_real, categoria, poderes, poder_principal, fraquezas, nivel_forca) VALUES (%s, %s, %s, %s, %s, %s, %s)"
             values = (nome_heroi, nome_real, categoria, ', '.join(poderes), poder_principal, ', '.join(fraquezas), nivel_forca)
             db.execute_query(query, values)
+
+            cursor= db.execute_query(query, values)
+
+            avengers = Avengers(cursor.lastrowid, nome_heroi, nome_real, categoria, poderes, poder_principal, fraquezas, nivel_forca)
+
 
         except Exception as e:
             print(f"Erro ao salvar vingador no banco de dados: {e}")
@@ -136,10 +144,8 @@ class Interface:
         avengers = Avengers.procurar_vingador(nome_heroi)  # Utiliza o método estático para procurar o vingador
 
         if avengers:
-            avenger = Avengers(nome_heroi)
-            avenger.convocacao = 'Sim'
             Avengers.convocacao=True
-            print(avenger)
+            print(f'Vingador {nome_heroi} foi convocado.')
         else:
             print(f'Vingador {nome_heroi} não encontrado.')
 
