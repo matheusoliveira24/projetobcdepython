@@ -36,6 +36,23 @@ class  Avengers:
             if avengers.nome_heroi.lower() == nome_heroi.lower():
                 return avengers
         return None  
+    
+    
+    @property
+    def convocacao(self):
+        return 'Sim' if self._convocacao else 'Não'
+    
+    @convocacao.setter
+    def convocacao(self, valor):
+        self._convocacao = valor
+
+    
+    def convocar(self):
+        self.convocacao = True
+        return f'{self.nome_heroi} convocado!'
+    
+
+
 
     def carregar_herois():
         try:
@@ -50,3 +67,5 @@ class  Avengers:
             print(f'Error: {e}')
         finally:
             db.disconnect()
+
+

@@ -59,14 +59,12 @@ class Interface:
         fraquezas = input('Fraquezas do herói: ')
         nivel_forca = input('Nível de força: ')
 
-        avengers = Avengers(nome_heroi, nome_real, categoria, poderes, poder_principal, fraquezas, nivel_forca)
-
         #Salvar o vingador no banco de dados
         try:
             db = Database()
             db.connect()
             query = "INSERT INTO heroi (nome_heroi, nome_real, categoria, poderes, poder_principal, fraquezas, nivel_forca) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-            values = (nome_heroi, nome_real, categoria, ', '.join(poderes), poder_principal, ', '.join(fraquezas), nivel_forca)
+            values = (nome_heroi, nome_real, categoria, ''.join(poderes), poder_principal, ''.join(fraquezas), nivel_forca)
             db.execute_query(query, values)
 
             cursor= db.execute_query(query, values)
@@ -141,14 +139,12 @@ class Interface:
     def status_concov():
         '''Este método permite que o usuário convoque um vingador e mude o status deste.'''
         nome_heroi = input('Digite o nome do herói que deseja convocar: ')
-        avengers = Avengers.procurar_vingador(nome_heroi)  # Utiliza o método estático para procurar o vingador
-
-        if avengers:
-            Avengers.convocacao=True
-            print(f'Vingador {nome_heroi} foi convocado.')
-        else:
-            print(f'Vingador {nome_heroi} não encontrado.')
-
+        for avengers in Avengers.lista_de_avengers:
+            if nome_heroi in avengers.nome_heroi or nome_heroi in avengers.nome_real:
+                print(avengers.convocar())
+                return
+        print(f"Vingador(a) '{nome_heroi}' não encontrado.")
+       
 
 
 
