@@ -46,6 +46,23 @@ class  Avengers:
     def convocacao(self, valor):
         self._convocacao = valor
 
+    @property
+    def tornozeleira(self):
+        return 'Sim' if self._tornozeleira else 'Não'
+
+    @tornozeleira.setter
+    def tornozeleira(self, valor):
+        self._tornozeleira = valor
+
+    @property
+    def gps(self):
+        return 'Sim' if self._chip_gps else 'Não'
+
+    @gps.setter
+    def chip_gps(self, valor):
+        self._chip_gps = valor
+
+
     
     # Funções de convocação, aplicar tornozeleira e gps
     def convocar(self):
