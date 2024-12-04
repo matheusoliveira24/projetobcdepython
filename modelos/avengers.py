@@ -75,9 +75,9 @@ class  Avengers:
     def aplicar_tornozeleira(self):
         if self._convocacao:
             if self.nome_heroi == 'Thor':
-                return '"Eu sou Thor, Deus do Trovão, filho de Odin! Nenhuma corrente ou restrição pode me controlar. \nTentem colocar-me uma tornozeleira, e verão o que acontece quando um deus é desafiado..."'
+                return '"Thor é chave para ter uma tornozeleira"'
             elif self.nome_heroi == 'Hulk':
-                return '"Hulk esmaga! Hulk mais forte tornozeira!"'
+                return '"Hulk esmaga! não cabe a tornozeleira!"'
             self.tornozeleira = True
             return 'Tornozeleira aplicada com sucesso!'
         return f'{self.nome_heroi} não foi convocado ainda.'
