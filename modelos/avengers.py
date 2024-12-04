@@ -66,6 +66,7 @@ class  Avengers:
         except Exception as e:
             print(f'Error: {e}')
         finally:
-            db.disconnect()
+            db.disconnect() 
+            
 
 
