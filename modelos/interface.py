@@ -160,16 +160,6 @@ class Interface:
                 print(avengers.aplicar_tornozeleira())
                 return
         print(f"Vingador(a) '{nome_heroi}' não encontrado.")
-
-    @staticmethod
-    def status_gps():
-        '''Este método permite que o usuário coloque a tornozeleira em um vingador e mude o status deste.'''
-        nome_heroi = input('Digite o nome do herói que deseja colocar a tornozeleira: ')
-        for avengers in Avengers.lista_de_avengers:
-            if nome_heroi in avengers.nome_heroi or nome_heroi in avengers.nome_real:
-                print(avengers.aplicar_chip_gps())
-                return
-        print(f"Vingador(a) '{nome_heroi}' não encontrado.")
        
 
 

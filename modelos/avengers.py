@@ -55,14 +55,6 @@ class  Avengers:
     def tornozeleira(self, valor):
         self._tornozeleira = valor
 
-    @property
-    def gps(self):
-        return 'Sim' if self._chip_gps else 'Não'
-
-    @gps.setter
-    def chip_gps(self, valor):
-        self._chip_gps = valor
-
     # fim mudança de estado
 
     
@@ -80,12 +72,6 @@ class  Avengers:
             self.tornozeleira = True
             return 'Tornozeleira aplicada com sucesso!'
         return f'{self.nome_heroi} não foi convocado ainda.'
-    
-    def aplicar_chip_gps(self):
-        if not self._tornozeleira:
-            return f'{self.nome_heroi} precisa estar com a tornozeleira aplicada.'
-        self.chip_gps = True
-        return 'Chip GPS aplicado com sucesso!'
     
     #Fim da funções 
     
