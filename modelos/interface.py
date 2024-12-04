@@ -32,9 +32,10 @@ class Interface:
         print('1. Cadastrar um novo Vingador')
         print('2. Listar todos os Vingadores Cadastrados')
         print('3. Declarar status de convocação')
-        print('4. Declarar status da tornozeleira')        
-        print('5. Listar detalhes Vingador')
-        print('6. sair')
+        print('4. Declarar status da tornozeleira')
+        print('5. Declarar status de gps')  
+        print('6. Listar detalhes Vingador')
+        print('7. sair')
         print()
         Interface.ler_opcao_usuario()
 
@@ -100,8 +101,10 @@ class Interface:
             elif opcao == 4:
                 Interface.status_tornozeleira()
             elif opcao == 5:
-                Interface.detalhes_vingador()
+                Interface.status_gps()
             elif opcao == 6:
+                Interface.detalhes_vingador()
+            elif opcao == 7:
                 print('Encerrando o programa')
                 exit()
             else:
@@ -158,6 +161,16 @@ class Interface:
         for avengers in Avengers.lista_de_avengers:
             if nome_heroi in avengers.nome_heroi or nome_heroi in avengers.nome_real:
                 print(avengers.aplicar_tornozeleira())
+                return
+        print(f"Vingador(a) '{nome_heroi}' não encontrado.")
+
+    @staticmethod
+    def status_gps():
+        '''Este método permite que o usuário coloque a tornozeleira em um vingador e mude o status deste.'''
+        nome_heroi = input('Digite o nome do herói que deseja colocar a tornozeleira: ')
+        for avengers in Avengers.lista_de_avengers:
+            if nome_heroi in avengers.nome_heroi or nome_heroi in avengers.nome_real:
+                print(avengers.aplicar_gps())
                 return
         print(f"Vingador(a) '{nome_heroi}' não encontrado.")
        

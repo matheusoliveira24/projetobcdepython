@@ -1,6 +1,7 @@
 from modelos.database import Database
 class  Avengers:
- 
+
+    CATEGORIAS_PERMITIDAS = ['Humano', 'Meta-humano', 'Androide', 'Deidade', 'Alienígena']
     lista_de_avengers = []
  
     def __init__(self, id, nome_heroi='', nome_real='', categoria=[], poderes=[], poder_principal='', fraquezas=[], nivel_forca='', convocacao=False, tornozeleira=False , gps=False): # método construtor
@@ -55,6 +56,14 @@ class  Avengers:
     def tornozeleira(self, valor):
         self._tornozeleira = valor
 
+    @property
+    def gps(self):
+        return 'Sim' if self._gps else 'Não'
+
+    @gps.setter
+    def gps(self, valor):
+        self._gps = valor
+
     # fim mudança de estado
 
     
@@ -72,6 +81,12 @@ class  Avengers:
             self.tornozeleira = True
             return 'Tornozeleira aplicada com sucesso!'
         return f'{self.nome_heroi} não foi convocado ainda.'
+    
+    def aplicar_gps(self):
+        if not self._tornozeleira:
+            return f'{self.nome_heroi} precisa estar com a tornozeleira aplicada.'
+        self.gps = True
+        return 'Chip GPS aplicado com sucesso!'
     
     #Fim da funções 
     
