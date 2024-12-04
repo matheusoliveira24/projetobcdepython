@@ -37,7 +37,8 @@ class  Avengers:
                 return avengers
         return None  
     
-    
+    # mudança de estado
+
     @property
     def convocacao(self):
         return 'Sim' if self._convocacao else 'Não'
@@ -62,6 +63,7 @@ class  Avengers:
     def chip_gps(self, valor):
         self._chip_gps = valor
 
+    # fim mudança de estado
 
     
     # Funções de convocação, aplicar tornozeleira e gps
@@ -70,7 +72,7 @@ class  Avengers:
         return f'{self.nome_heroi} convocado!'
     
     def aplicar_tornozeleira(self):
-        if self._convocado:
+        if self._convocacao:
             if self.nome_heroi == 'Thor':
                 return '"Eu sou Thor, Deus do Trovão, filho de Odin! Nenhuma corrente ou restrição pode me controlar. \nTentem colocar-me uma tornozeleira, e verão o que acontece quando um deus é desafiado..."'
             elif self.nome_heroi == 'Hulk':
