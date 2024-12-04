@@ -47,9 +47,28 @@ class  Avengers:
         self._convocacao = valor
 
     
+    # Funções de convocação, aplicar tornozeleira e gps
     def convocar(self):
         self.convocacao = True
         return f'{self.nome_heroi} convocado!'
+    
+    def aplicar_tornozeleira(self):
+        if self._convocado:
+            if self.nome_heroi == 'Thor':
+                return '"Eu sou Thor, Deus do Trovão, filho de Odin! Nenhuma corrente ou restrição pode me controlar. \nTentem colocar-me uma tornozeleira, e verão o que acontece quando um deus é desafiado..."'
+            elif self.nome_heroi == 'Hulk':
+                return '"Hulk esmaga! Hulk mais forte tornozeira!"'
+            self.tornozeleira = True
+            return 'Tornozeleira aplicada com sucesso!'
+        return f'{self.nome_heroi} não foi convocado ainda.'
+    
+    def aplicar_chip_gps(self):
+        if not self._tornozeleira:
+            return f'{self.nome_heroi} precisa estar com a tornozeleira aplicada.'
+        self.chip_gps = True
+        return 'Chip GPS aplicado com sucesso!'
+    
+    #Fim da funções 
     
 
 
