@@ -35,7 +35,7 @@ class Database:
             print('Query executada com sucesso')
             return self.cursor
         except Error as e:
-            print(f"Erro: {e}")
+            print(f"Erro da query: {e}")
             return None
         
     def select(self, query):
@@ -43,7 +43,7 @@ class Database:
             self.cursor.execute(query)
             return self.cursor.fetchall()
         except Error as e:
-            print(f"Erro: {e}")
+            print(f"Erro do select: {e}")
             return None
 
 #Database().connect()

@@ -2,6 +2,8 @@
 from  modelos.avengers import Avengers
 import os
 from modelos.database import Database #
+from datetime import date
+from datetime import datetime
 
 class Interface:
 
@@ -99,7 +101,7 @@ class Interface:
             elif opcao == 3:
                 Interface.status_concov()
             elif opcao == 4:
-                Interface.status_tornozeleira()
+                Interface.tornozeleira()
             elif opcao == 5:
                 Interface.status_gps()
             elif opcao == 6:
@@ -155,14 +157,57 @@ class Interface:
 
 
     @staticmethod
-    def status_tornozeleira():
-        '''Este método permite que o usuário coloque a tornozeleira em um vingador e mude o status deste.'''
-        nome_heroi = input('Digite o nome do herói que deseja colocar a tornozeleira: ')
-        for avengers in Avengers.lista_de_avengers:
-            if nome_heroi in avengers.nome_heroi or nome_heroi in avengers.nome_real:
-                print(avengers.aplicar_tornozeleira())
+    def tornozeleira():
+        try:
+            db = Database()
+            db.connect()
+
+            nome_heroi = input("Nome do Heroi que Deseja Aplicar a tornozeleira: ")
+            query_heroi = f"SELECT heroi_id FROM heroi WHERE nome_heroi like '{nome_heroi}'"
+
+            heroi_id_resultado = db.select(query_heroi)
+            # heroi_id_resultado = int(heroi_id_resultado[0][0])
+            # convocacao = db.select(query_heroi, (convocacao))
+            
+
+            if not heroi_id_resultado:
+                print("Herói Não Encontrado")
                 return
-        print(f"Vingador(a) '{nome_heroi}' não encontrado.")
+            
+            heroi_id = int(heroi_id_resultado[0][0])
+
+            # if not convocacao:
+            #     print("Heroi não convocado, convoque-o primeiro")
+            #     return
+            
+            status = input("Status da Tornozeleira (Ativa ou Inativa): ")
+            
+            data_ativacao = datetime.now()
+
+            ativacao = input("Data de Ativação da tornozeleira (dd/mm/aaaa): ")
+            if ativacao:
+                data_ativacao = datetime.strptime(ativacao, "%y/%m/%d")
+            else:
+                data_ativacao = None
+
+            # data_desativacao = datetime.now()
+
+            # desativacao = input("Data de desativação (dd/mm/aaaa): ")
+            # if desativacao:
+            #     data_desativacao = datetime.strptime(desativacao, "%d,%m,%y")
+            # else:
+            #     data_desativacao = None
+
+            query = "INSERT INTO tornozeleira (status, data_ativacao)"
+            values = (status, data_ativacao)
+            db.execute_query(query, values)
+
+            print("Tornozeleira Aplicada!")
+
+        except Exception as e:
+            print(f"Ocorreu um erro: {e}")
+        finally:
+            db.disconnect
 
     @staticmethod
     def status_gps():
