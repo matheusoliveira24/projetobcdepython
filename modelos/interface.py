@@ -1,7 +1,7 @@
 # from modelos import avengers
 from  modelos.avengers import Avengers
 import os
-from modelos.database import Database #
+from modelos.database import Database
 from datetime import date
 from datetime import datetime
 
