@@ -20,7 +20,7 @@ class Database:
                 database = self.database
             ) 
             self.cursor = self.connection.cursor()
-            print('Conexão com o banco de dados realizada com sucesso')
+            print('Conexão com o banco de dados realizada com sucesso!')
         except Error as e:
             print(f'Erro: {e}')
 
